@@ -37,7 +37,7 @@ install.packages(c("httr", "urltools", "jsonlite", "tidyverse"))
 
 citation("httr")
 
-# To cite package ‘httr’ in publications use:
+# To cite package â€˜httrâ€™ in publications use:
 
 # Hadley Wickham (2019). httr: Tools for Working with URLs and HTTP. R package version 1.4.1.
 # https://CRAN.R-project.org/package=httr
@@ -54,7 +54,7 @@ citation("httr")
 
 citation("urltools")
 
-# To cite package ‘urltools’ in publications use:
+# To cite package â€˜urltoolsâ€™ in publications use:
   
 # Os Keyes, Jay Jacobs, Drew Schmidt, Mark Greenaway, Bob Rudis, Alex Pinto, Maryam Khezrzadeh, Peter
 # Meilstrup, Adam M. Costello, Jeff Bezanson, Peter Meilstrup and Xueyuan Jiang (2019). urltools:
