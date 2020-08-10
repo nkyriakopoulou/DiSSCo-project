@@ -36,7 +36,7 @@ citation("rentrez")
 library(rentrez)
 library(tidyverse)
 
-bats.accessions <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/bats.accessions.csv") 
+bats.accessions <- read.csv(file = 'bats.accessions.csv') 
 names(bats.accessions)[1] <- "accessions"
 
 # create accession vector
@@ -47,8 +47,8 @@ length(accessions)
 # 128 accessions
 accessions
 
-# [1] "MN183146" "MN183147" "MN183148" "MN183149" "MN183150" "MN183151" "MN183152" "MN183153" "MN183154" "MN183155" "MN183156" "MN183157" "MN183158"
-# [14] "MN183159" "MN183160" "MN183161" "MN183162" "MN183163" "MN183164" "MN183165" "MN183166" "MN183167" "MN183168" "MN183169" "MN183170" "MN183171"
+# "MN183146" "MN183147" "MN183148" "MN183149" "MN183150" "MN183151" "MN183152" "MN183153" "MN183154" "MN183155" "MN183156" "MN183157" "MN183158"
+# "MN183159" "MN183160" "MN183161" "MN183162" "MN183163" "MN183164" "MN183165" "MN183166" "MN183167" "MN183168" "MN183169" "MN183170" "MN183171"
 # ...
 
 # First we will check the type of format used for the specimen vouchers.
@@ -146,12 +146,12 @@ accessions.data.df <- accessions.data.df[, c(2, 6, 1, 3, 4, 5)]
 
 colnames(accessions.data.df) <- c("accession", "organism", "uid", "definition", "subtype", "subname")
 
-write.csv(accessions.data.df, file = "D:/Research project_DISSCO/DISSCO R/bats.summariesGenBank.csv", row.names = F)
+write.csv(accessions.data.df, file = 'bats.summariesGenBank.csv', row.names = F)
 
 # Each accession has one GenBank ID and all of them are linked to the same organism (bat coronavirus). GenBank IDs (uids) are 
 # not included in the paper but accessions can be easily traced in nuccore so the IDs are not essential in this case.
 
-accessions.data.df <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/bats.summariesGenBank.csv")
+accessions.data.df <- read.csv(file = 'bats.summariesGenBank.csv')
 
 # According to the summaries downloaded from GenBank, the field "subname" contains source identifiers "isolate" and "host" 
 # which indicate viral source material and not material that has been stored in a museum or a collection 
@@ -213,14 +213,14 @@ accessions.data.df$host.identifier = sub("^[^;]*;", "", as.character(accessions.
 
 accessions.data.df$host.identifier = sub("^[^;]*;", "", as.character(accessions.data.df$host.identifier))
 
-write.csv(accessions.data.df, file = "D:/Research project_DISSCO/DISSCO R/bats.dataGenBank.csv", row.names = F)
+write.csv(accessions.data.df, file = 'bats.dataGenBank.csv', row.names = F)
 
 
 # Process bats.dataGenBank csv file.
 
 #  Examine the format of host identifiers ---------------------------------
 
-accessions.data <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/bats.dataGenBankNEW.csv")
+accessions.data <- read.csv(file = 'bats.dataGenBankNEW.csv')
 
 length(accessions.data$host.identifier[accessions.data$host.identifier==""])
 # 14 sequence accessions do not have a host identifier, probably they come from non-vouchered specimens
