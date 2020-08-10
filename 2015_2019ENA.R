@@ -1169,7 +1169,7 @@ institution_code_ROR_df <- lapply(institution_code_ROR, as.data.frame)
 # Filter GRID.json data frame. Select rows based on the values in "acronyms" variable matching to the values in
 # the "institution_codeALL" character vector.
 
-GRID.json <- read_json("D:/Research project_DISSCO/grid-2020-03-15/grid.json", simplifyVector = TRUE)
+GRID.json <- read_json('grid-2020-03-15/grid.json', simplifyVector = TRUE)
 
 class(GRID.json)
 # "list"
@@ -1230,7 +1230,7 @@ nores_GRID_json$n[is.na(nores_GRID_json$n)] <- ""
 names(nores_GRID_json)[1] <- "institution codes" 
 names(nores_GRID_json)[2] <- "number of results" 
 
-write.csv(nores_GRID_json, file = "D:/Research project_DISSCO/DISSCO R/nores_GRID_json.csv", row.names = F)
+write.csv(nores_GRID_json, file = 'nores_GRID_json.csv', row.names = F)
 
 
 #  Search against GBIF API (https://www.gbif.org/developer/registry) ---------------------------------
@@ -1307,7 +1307,7 @@ institution_code_nores1$number_of_results1[is.na(institution_code_nores1$number_
 names(institution_code_nores1)[1] <- "institution codes"
 names(institution_code_nores1)[2] <- "number of results"
 
-write.csv(institution_code_nores1, file = "D:/Research project_DISSCO/DISSCO R/institution_code_nores1.csv", row.names = F)
+write.csv(institution_code_nores1, file = 'institution_code_nores1.csv', row.names = F)
 
 
 # 58 institution codes had error
@@ -1360,7 +1360,7 @@ length(collection_code)
 
 collection_codeTOT <- as.data.frame(collection_code)
 
-write.csv(collection_codeTOT, file = "D:/Research project_DISSCO/DISSCO R/collection_codeTOT.csv", row.names = F)
+write.csv(collection_codeTOT, file = 'collection_codeTOT.csv', row.names = F)
 
 base_GBIF1 = "https://api.gbif.org/v1/grscicoll/collection?q=%s"
 
@@ -1413,7 +1413,7 @@ collection_code_nores$number_of_results2[is.na(collection_code_nores$number_of_r
 names(collection_code_nores)[1] <- "collection codes"
 names(collection_code_nores)[2] <- "number of results"
 
-write.csv(collection_code_nores, file = "D:/Research project_DISSCO/DISSCO R/collection_code_nores.csv", row.names = F)
+write.csv(collection_code_nores, file = 'collection_code_nores.csv', row.names = F)
 
 
 # 49 institution codes had Error
