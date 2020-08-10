@@ -1,3 +1,4 @@
+
 # Name: Niki Kyriakopoulou
 # Master Research Project: Repair what is broken
 # Date:2020
@@ -16,7 +17,7 @@ citation()
 citation("base")
 
 # To cite R in publications use:
-  
+
 # R Core Team (2020). R: A language and environment for statistical computing. R Foundation for
 # Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 
@@ -33,7 +34,7 @@ citation("base")
 
 citation("httr")
 
-# To cite package â€˜httrâ€™ in publications use:
+# To cite package ‘httr’ in publications use:
 
 # Hadley Wickham (2019). httr: Tools for Working with URLs and HTTP. R package version 1.4.1.
 # https://CRAN.R-project.org/package=httr
@@ -50,8 +51,8 @@ citation("httr")
 
 citation("urltools")
 
-# To cite package â€˜urltoolsâ€™ in publications use:
-  
+# To cite package ‘urltools’ in publications use:
+
 # Os Keyes, Jay Jacobs, Drew Schmidt, Mark Greenaway, Bob Rudis, Alex Pinto, Maryam Khezrzadeh, Peter
 # Meilstrup, Adam M. Costello, Jeff Bezanson, Peter Meilstrup and Xueyuan Jiang (2019). urltools:
 # Vectorised Tools for URL Handling and Parsing. R package version 1.7.3.
@@ -70,7 +71,7 @@ citation("urltools")
 citation("jsonlite")
 
 # To cite jsonlite in publications use:
-  
+
 # Jeroen Ooms (2014). The jsonlite Package: A Practical and Consistent Mapping Between JSON Data and R
 # Objects. arXiv:1403.2805 [stat.CO] URL https://arxiv.org/abs/1403.2805.
 
@@ -179,7 +180,7 @@ search.df
 # 10 AP014562 Japan:Myo~ "32.1 N ~ Bathymodiolus septem~ Bathymodiolus ~ ""           ""               ""               ""               ""             
 # ... with 1,404,507 more rows
 
-write.csv(search.df, file = 'ENA_sequences_2015_2019.csv', row.names = F)
+write.csv(search.df, file = "D:/Research project_DISSCO/DISSCO R/ENA_sequences_2015_2019.csv", row.names = F)
 
 length(search.df$accession)
 # 1,404,517 accessions
@@ -187,7 +188,7 @@ length(search.df$accession)
 
 #  How many accessions have information in at least one of the source qualifier fields? ---------------------------------
 
-search.df <- read.csv(file = 'ENA_sequences_2015_2019.csv')
+search.df <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA_sequences_2015_2019.csv")
 
 # Create a new data frame with sequence accessions that have source identifiers.
 search.df.source <- search.df %>% filter(!(bio_material == "" & specimen_voucher == "" & culture_collection == ""))
@@ -198,7 +199,7 @@ length(search.df.source$accession)
 (length(search.df.source$accession)/length(search.df$accession))*100
 # 32.87337% of the 1.4 million sequence accessions have at least 1 source identifier and will be used for further analysis.
 
-write.csv(search.df.source, file = 'ENAsource.analysis.csv', row.names = F)
+write.csv(search.df.source, file = "D:/Research project_DISSCO/DISSCO R/ENAsource.analysis.csv", row.names = F)
 
 
 #  How many accessions do not have information in one of the source qualifier fields? ---------------------------------
@@ -213,7 +214,7 @@ length(search.df.nosource$accession)
 
 # 2 accessions are missing so they will be excluded from the analysis
 
-write.csv(search.df.nosource, file = 'ENAnosource.analysis.csv', row.names = F)
+write.csv(search.df.nosource, file = "D:/Research project_DISSCO/DISSCO R/ENAnosource.analysis.csv", row.names = F)
 
 slices <- c(461712, 942803)
 lbls <- c("At least 1 source identifier", "No source identifier")
@@ -234,7 +235,7 @@ length(sample$accession)
 (length(sample$accession)/length(search.df.nosource$accession))*100
 # 6.741281% of the 942,803 accessions have sample accession ID
 
-write.csv(sample, file = 'ENAsample.analysis.csv', row.names = F)
+write.csv(sample, file = "D:/Research project_DISSCO/DISSCO R/ENAsample.analysis.csv", row.names = F)
 
 
 #  How many accessions from the remaining 67% do not have sample accession ID? ---------------------------------
@@ -257,8 +258,8 @@ pie(slices1,labels = lbls1, col=rainbow(length(lbls1)),
 
 
 #  Examine the accessions that do not have source identifiers and assess if they are taken from viruses and bacteria ---------------------------------
-  
-search.df.nosource <- read.csv(file = 'ENAnosource.analysis.csv')
+
+search.df.nosource <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENAnosource.analysis.csv")
 
 search.df.nosource[is.na(search.df.nosource)] <- "" 
 
@@ -317,18 +318,18 @@ sum(484027, 74033, 16284, 66, 84325, 549)
 (659284/length(search.df.nosource$accession))*100
 # 69.92808% of the accessions with no source identifiers refer to sequences coming from viruses, bacteria and in general, microorganisms
 
-write.csv(search.df.nosource, file = 'ENAnosource.analysis.csv', row.names = F)
+write.csv(search.df.nosource, file = "D:/Research project_DISSCO/DISSCO R/ENAnosource.analysis.csv", row.names = F)
 
 
 #  Examine the data frame that contains sequences with source identifiers and split into smaller data frames ---------------------------------
-  
+
 rm(list = ls(all=T))
 setwd("D:/Research project_DISSCO/DISSCO R")
 getwd()
 
 library(tidyverse)
 
-search.df.source <- read.csv(file = 'ENAsource.analysis.csv')
+search.df.source <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENAsource.analysis.csv")
 
 # Some accessions seem to have more than one culture_collection or specimen_voucher identifiers separated by ;.
 # We will create three different data frames and analyse them separately.
@@ -348,12 +349,12 @@ length(sourceC$accession)
 sourceA <- search.df.source %>%
   filter(
     !str_detect(culture_collection, ";")
-)
+  )
 
 sourceA <- sourceA %>%
   filter(
     !str_detect(specimen_voucher, ";")
-)
+  )
 
 length(sourceA$accession)
 # 461,543 accessions have one identifier in each source qualifier column
@@ -446,7 +447,7 @@ ENA.dfA.A.codes$collection_codeB = sub("^[^:]*:", "", as.character(ENA.dfA.A.cod
 ENA.dfA.A.codes$collection_codeB = sub("\\:[^:]*$", "", as.character(ENA.dfA.A.codes$collection_codeB)) # remove part of string after last ":"
 
 # collection_codeB column ready
-  
+
 
 ENA.dfA.A.codes <- ENA.dfA.A.codes %>% add_column(institution_codeA = NA, .after = "bio_material") # create a new column
 
@@ -489,7 +490,7 @@ ENA.dfA.A.codes$institution_codeB = sub("\\:[^:]*", "", as.character(ENA.dfA.A.c
 
 ENA.dfA.A.codes <- ENA.dfA.A.codes[, c(1, 2, 3, 4, 5, 6, 10, 11, 7, 8, 9, 12, 13, 14, 15, 16)]
 
-write.csv(ENA.dfA.A.codes, file = 'ENA.dfA.A.codes.csv', row.names = F)
+write.csv(ENA.dfA.A.codes, file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.A.codes.csv", row.names = F)
 
 
 #  sourceA.B data frame =================================
@@ -552,11 +553,11 @@ ENA.dfA.B.codes$institution_codeB = sub("\\:[^:]*", "", as.character(ENA.dfA.B.c
 
 ENA.dfA.B.codes <- ENA.dfA.B.codes[, c(1, 2, 3, 4, 5, 6, 7, 10, 8, 9, 11, 12, 13, 14)]
 
-write.csv(ENA.dfA.B.codes, file = 'ENA.dfA.B.codes.csv', row.names = F)
+write.csv(ENA.dfA.B.codes, file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.B.codes.csv", row.names = F)
 
 
 #  sourceA.C data frame =================================
-  
+
 ENA.dfA.C <- unite(sourceA.C, source_identifier, c("bio_material", "culture_collection", "specimen_voucher"), sep = "", remove = FALSE)
 
 ENA.dfA.C.codes <- ENA.dfA.C %>% add_column(material_culture_or_specimen_id  = NA, .after = "source_identifier") #create a new column 
@@ -612,12 +613,12 @@ ENA.dfA.C.codes$institution_code = sub("\\:[^:]*$", "", as.character(ENA.dfA.C.c
 
 ENA.dfA.C.codes <- ENA.dfA.C.codes[, c(1, 2, 3, 4, 5, 10, 11, 12, 6, 7, 8, 9, 13, 14)]
 
-write.csv(ENA.dfA.C.codes, file = 'ENA.dfA.C.codes.csv', row.names = F)
+write.csv(ENA.dfA.C.codes, file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.C.codes.csv", row.names = F)
 
 
 #  Next we will work on sourceB and sourceC data frames ---------------------------------
 #  sourceB data frame =================================
-  
+
 ENA.dfB <- unite(sourceB, source_identifier, c("bio_material", "culture_collection", "specimen_voucher"), sep = "", remove = FALSE)
 
 # rearrange columns in ENA.dfB
@@ -633,11 +634,11 @@ ENA.dfB.codes <- separate(data = ENA.dfB.codes, col = culture_collectionB, into 
 
 ENA.dfB.codes[is.na(ENA.dfB.codes)] <- "" 
 
-write.csv(ENA.dfB.codes, file = 'ENA.dfB.codes.csv', row.names = F)
+write.csv(ENA.dfB.codes, file = "D:/Research project_DISSCO/DISSCO R/ENA.dfB.codes.csv", row.names = F)
 
 
 #  sourceC data frame =================================
-  
+
 ENA.dfC <- unite(sourceC, source_identifier, c("bio_material", "culture_collection", "specimen_voucher"), sep = "", remove = FALSE)
 
 # rearrange columns in ENA.dfC
@@ -727,7 +728,7 @@ ENA.dfC.codes$specimen_idC[is.na(ENA.dfC.codes$specimen_idC)] <- as.character(EN
 
 # specimen_idC column ready
 
-write.csv(ENA.dfC.codes, file = 'ENA.dfC.codes.csv', row.names = F)
+write.csv(ENA.dfC.codes, file = "D:/Research project_DISSCO/DISSCO R/ENA.dfC.codes.csv", row.names = F)
 
 
 #  Calculate percentages of sequence accessions with source identifiers that have one, two or three parts of the Darwin Core Triplet ---------------------------------
@@ -738,8 +739,8 @@ getwd()
 
 library(tidyverse)
 
-ENA.dfB.codes <- read.csv(file = 'ENA.dfB.codes.csv')
-ENA.dfC.codes <- read.csv(file = 'ENA.dfC.codes.csv')
+ENA.dfB.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfB.codes.csv")
+ENA.dfC.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfC.codes.csv")
 
 # ENA.dfB.codes: 46 accessions have two culture_collection identifiers each. Both have the format /culture_collection=institution-code:culture_id.
 # ENA.dfC.codes: 123 accessions have two or three specimen_vouchers with formats /specimen_voucher=institution-code:specimen_id and 
@@ -806,8 +807,7 @@ length(dash[dash == "TRUE"])
 # formats = institution-code:specimen_id and = specimen_id.
 
 
-
-ENA.dfA.A.codes <- read.csv(file = 'ENA.dfA.A.codes.csv')
+ENA.dfA.A.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.A.codes.csv")
 
 df <- ENA.dfA.A.codes %>%
   filter(institution_codeA!="" & collection_codeA!="" & material_id!="" & institution_codeB!="" & collection_codeB!="" & specimen_id!="")
@@ -876,7 +876,7 @@ length(df5$accession)
 # = institution-code:material_id/specimen_id and = material_id/specimen_id (4 have the dash delimiter).
 
 
-ENA.dfA.B.codes <- read.csv(file = 'ENA.dfA.B.codes.csv')
+ENA.dfA.B.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.B.codes.csv")
 
 df <- ENA.dfA.B.codes %>%
   filter(institution_codeA!="" & culture_id!="" & institution_codeB!="" & specimen_id!="")
@@ -903,7 +903,7 @@ length(dash[dash == "TRUE"])
 # and 223 accessions with source identifier formats = institution-code:culture_id and = specimen_id (58 have the dash delimiter). 
 
 
-ENA.dfA.C.codes <- read.csv(file = 'ENA.dfA.C.codes.csv')
+ENA.dfA.C.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.C.codes.csv")
 
 df <- ENA.dfA.C.codes %>%
   filter(institution_code!="" & collection_code!="" & material_culture_or_specimen_id!="")
@@ -939,7 +939,7 @@ length(dash[dash == "TRUE"])
 # How many accessions coming from all data frames have source identifiers that correspond to the Darwin Core Triplet (institution_code, 
 # collection_code and material/culture/specimen_id (=catalogNumber))? How many accessions have two or one part of the triplet?
 
-search.df.source <- read.csv(file = 'ENAsource.analysis.csv')
+search.df.source <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENAsource.analysis.csv")
 
 # Number of accessions with source identifier format that corresponds to the Darwin Core Triplet
 sum(38,4476)
@@ -1017,11 +1017,11 @@ library(httr)
 library(jsonlite)
 library(tidyverse)
 
-ENA.dfA.A.codes <- read.csv(file = 'ENA.dfA.A.codes.csv')
-ENA.dfA.B.codes <- read.csv(file = 'ENA.dfA.B.codes.csv')
-ENA.dfA.C.codes <- read.csv(file = 'ENA.dfA.C.codes.csv')
-ENA.dfB.codes <- read.csv(file = 'ENA.dfB.codes.csv')
-ENA.dfC.codes <- read.csv(file = 'ENA.dfC.codes.csv')
+ENA.dfA.A.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.A.codes.csv")
+ENA.dfA.B.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.B.codes.csv")
+ENA.dfA.C.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.C.codes.csv")
+ENA.dfB.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfB.codes.csv")
+ENA.dfC.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfC.codes.csv")
 
 
 # Create a character vector of institution codes from all data frames.
@@ -1051,17 +1051,17 @@ institution_codeALL
 
 institution_codeTOT <- as.data.frame(institution_codeALL)
 
-write.csv(institution_codeTOT, file = 'institution_codeTOT.csv', row.names = F)
+write.csv(institution_codeTOT, file = "D:/Research project_DISSCO/DISSCO R/institution_codeTOT.csv", row.names = F)
 
 base_ROR = "https://api.ror.org/organizations?query=%s"
 
-institution_code_RORurls <- sprintf(base_ROR, institution_codeALL) # list of URLS
+institution_code_RORurls <- sprintf(base_ROR, institution_codeALL) # list of URLs
 
-institution_code_RORurls[1] 
+institution_code_RORurls[1]
 
 # "https://api.ror.org/organizations?query=NRM"
 
-URLS <- lapply(institution_code_RORurls, GET) # list of responses
+URLS <- lapply(institution_code_RORurls, GET) #list of responses
 
 URLS[1]
 
@@ -1131,7 +1131,7 @@ names(institution_code_nores)[2] <- "number of results"
 
 institution_code_nores$`number of results`[is.na(institution_code_nores$`number of results`)] <- "" 
 
-write.csv(institution_code_nores, file = 'institution_code_nores.csv', row.names = F)
+write.csv(institution_code_nores, file = "D:/Research project_DISSCO/DISSCO R/institution_code_nores.csv", row.names = F)
 
 # 5 institution codes had error
 
@@ -1148,7 +1148,7 @@ length(number_of_results[number_of_results>2])
 # 175 institution codes had more than 2 results
 
 
-# Pie chart with percentages of institution codes that have error, 0, 1, 2 or more than 2 results in ROR API
+#Pie chart with percentages of institution codes that have error, 0, 1, 2 or more than 2 results in ROR API
 
 slices <- c(5, 186, 79, 36, 175)
 lbls <- c("Error", "0 results", "1 result", "2 results", ">2 results")
@@ -1164,12 +1164,12 @@ institution_code_ROR_df <- lapply(institution_code_ROR, as.data.frame)
 # list of data frames with results per institution code query
 
 
-#  Search GRID for the institution codes of the studied accessions ---------------------------------
+#  Search institution codes against GRID database ---------------------------------
 
 # Filter GRID.json data frame. Select rows based on the values in "acronyms" variable matching to the values in
 # the "institution_codeALL" character vector.
 
-GRID.json <- read_json('grid-2020-03-15/grid.json', simplifyVector = TRUE)
+GRID.json <- read_json("D:/Research project_DISSCO/grid-2020-03-15/grid.json", simplifyVector = TRUE)
 
 class(GRID.json)
 # "list"
@@ -1208,7 +1208,7 @@ length(nores_GRID_json$n[nores_GRID_json$n==2])
 length(nores_GRID_json$n[nores_GRID_json$n>2])
 # 69 institution codes had more than 2 results
 
-# Pie chart with percentages of institution codes that have 0, 1, 2 or more than 2 matches in GRID.acronyms data frame
+# Pie chart with percentages of institution codes that have 0, 1, 2 or more than 2 matches in GRID database
 
 slices1 <- c(298, 80, 34, 69)
 lbls1 <- c("0 results", "1 result", "2 results", ">2 results")
@@ -1230,12 +1230,10 @@ nores_GRID_json$n[is.na(nores_GRID_json$n)] <- ""
 names(nores_GRID_json)[1] <- "institution codes" 
 names(nores_GRID_json)[2] <- "number of results" 
 
-write.csv(nores_GRID_json, file = 'nores_GRID_json.csv', row.names = F)
+write.csv(nores_GRID_json, file = "D:/Research project_DISSCO/DISSCO R/nores_GRID_json.csv", row.names = F)
 
 
-#  Search against GBIF API (https://www.gbif.org/developer/registry) ---------------------------------
-
-#  Institution codes =================================
+#  Search institution codes against GBIF Registry of Scientific Collections API (https://www.gbif.org/developer/registry) ---------------------------------
   
 base_GBIF = "https://api.gbif.org/v1/grscicoll/institution?q=%s"
 
@@ -1307,7 +1305,7 @@ institution_code_nores1$number_of_results1[is.na(institution_code_nores1$number_
 names(institution_code_nores1)[1] <- "institution codes"
 names(institution_code_nores1)[2] <- "number of results"
 
-write.csv(institution_code_nores1, file = 'institution_code_nores1.csv', row.names = F)
+write.csv(institution_code_nores1, file = "D:/Research project_DISSCO/DISSCO R/institution_code_nores1.csv", row.names = F)
 
 
 # 58 institution codes had error
@@ -1325,7 +1323,7 @@ length(number_of_results1[number_of_results1>2])
 # 169 institution codes had more than 2 results
 
 
-# Pie chart with percentages of institution codes that have 0, 1, 2 or more than 2 results in GBIF API
+# Pie chart with percentages of institution codes that have error, 0, 1, 2 or more than 2 results in GBIF Registry of Scientific Collections
 
 slices2 <- c(58, 48, 152, 54, 169)
 lbls2 <- c("Error", "0 results", "1 result", "2 results", ">2 results")
@@ -1341,7 +1339,7 @@ institution_code_GBIF_df <- lapply(institution_code_GBIF, as.data.frame)
 # list of data frames with results per institution code query
 
 
-#  Collection codes =================================
+#  Search collection codes against GBIF Registry of Scientific Collections API (https://www.gbif.org/developer/registry) ---------------------------------
   
 # Create a character vector of collection codes from all data frames.
   
@@ -1360,11 +1358,11 @@ length(collection_code)
 
 collection_codeTOT <- as.data.frame(collection_code)
 
-write.csv(collection_codeTOT, file = 'collection_codeTOT.csv', row.names = F)
+write.csv(collection_codeTOT, file = "D:/Research project_DISSCO/DISSCO R/collection_codeTOT.csv", row.names = F)
 
 base_GBIF1 = "https://api.gbif.org/v1/grscicoll/collection?q=%s"
 
-collection_code_GBIFurls <- sprintf(base_GBIF1, collection_code) # list of URLS
+collection_code_GBIFurls <- sprintf(base_GBIF1, collection_code) # list of URLS 
 
 collection_code_GBIFurls[[1]] 
 
@@ -1413,10 +1411,10 @@ collection_code_nores$number_of_results2[is.na(collection_code_nores$number_of_r
 names(collection_code_nores)[1] <- "collection codes"
 names(collection_code_nores)[2] <- "number of results"
 
-write.csv(collection_code_nores, file = 'collection_code_nores.csv', row.names = F)
+write.csv(collection_code_nores, file = "D:/Research project_DISSCO/DISSCO R/collection_code_nores.csv", row.names = F)
 
 
-# 49 institution codes had Error
+# 49 collection codes had Error
 
 length(number_of_results2[number_of_results2==0])
 # 18 collection codes had 0 results
@@ -1428,10 +1426,10 @@ length(number_of_results2[number_of_results2==2])
 # 2 collection codes had 2 results
 
 length(number_of_results2[number_of_results2>2])
-# 29 institution codes had more than 2 results
+# 29 collection codes had more than 2 results
 
 
-# Pie chart with percentages of institution codes that have error, 0, 1, 2 or more than 2 results in GBIF API
+# Pie chart with percentages of collection codes that have error, 0, 1, 2 or more than 2 results in GBIF Registry of Scientific Collections
 
 slices3 <- c(49, 18, 6, 2, 29)
 lbls3 <- c("Error", "0 results", "1 result", "2 results", ">2 results")
