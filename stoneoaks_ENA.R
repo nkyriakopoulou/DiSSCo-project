@@ -22,7 +22,7 @@ library(jsonlite)
 library(tidyverse)
 
 # Accession list of Lithocarpus species
-Lithocarpus.vouchers <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/Supplementary Table_Lithocarpus.csv")
+Lithocarpus.vouchers <- read.csv(file = 'Supplementary Table_Lithocarpus.csv')
 names(Lithocarpus.vouchers)[1] <- "Species"
 
 Lithocarpus.vouchers$Voucher.info
@@ -38,7 +38,7 @@ length(Lithocarpus.vouchers$Voucher.info)
 # (55 in total) have the INSDC /specimen voucher format =institution-code:specimen_id. 
 
 # Quercus dataset
-Quercus.vouchers <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/Supplementary Table_Quercus.csv")
+Quercus.vouchers <- read.csv(file = 'Supplementary Table_Quercus.csv')
 names(Quercus.vouchers)[1] <- "Species"
 
 # After examining the Quercus.vouchers dataset, the specimen vouchers also seem to conform to the ENA format
@@ -133,14 +133,14 @@ Quercus.vouchersENA$scientific_name[1] <- "Quercus sp."
 
 Quercus.vouchersENA <- subset(Quercus.vouchersENA, select = -bio_material)
 
-write.csv(Quercus.vouchersENA, file = "D:/Research project_DISSCO/DISSCO R/Quercus.vouchersENA.csv", row.names = F)
+write.csv(Quercus.vouchersENA, file = 'Quercus.vouchersENA.csv', row.names = F)
 
 
 Quercus.vouchers <- Quercus.vouchers[, c(5, 1, 2, 3, 4)]
 
 Quercus.vouchers <- Quercus.vouchers[order(Quercus.vouchers$Accession),]
 
-write.csv(Quercus.vouchers, file = "D:/Research project_DISSCO/DISSCO R/Quercus.vouchers.csv", row.names = F)
+write.csv(Quercus.vouchers, file = 'Quercus.vouchers.csv', row.names = F)
 
 # Comparing the two data frames Quercus.vouchers (from paper) and Quercus.vouchersENA we conclude that 
 # the institution codes for the same accessions are different. According to the paper it's "KYO" while
@@ -189,11 +189,11 @@ library(httr)
 library(jsonlite)
 library(tidyverse)
 
-Quercus.vouchersENA <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/Quercus.vouchersENA.csv")
+Quercus.vouchersENA <- read.csv(file = 'Quercus.vouchersENA.csv')
 
-Quercus.vouchers <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/Quercus.vouchers.csv")
+Quercus.vouchers <- read.csv(file = 'Quercus.vouchers.csv')
   
-Lithocarpus.vouchers <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/Supplementary Table_Lithocarpus.csv")
+Lithocarpus.vouchers <- read.csv(file = 'Supplementary Table_Lithocarpus.csv')
 
   
 l <- Lithocarpus.vouchers$Institution.codes
@@ -292,7 +292,7 @@ institution.code.items.df <- lapply(institution.code.items, as.data.frame)
 
 #  Search institution codes against GRID database ---------------------------------
 
-GRID.json <- read_json("D:/Research project_DISSCO/grid-2020-03-15/grid.json", simplifyVector = TRUE)
+GRID.json <- read_json('grid-2020-03-15/grid.json', simplifyVector = TRUE)
 
 class(GRID.json)
 # "list"
@@ -378,7 +378,7 @@ contents1[[7]]
 # ""
 
 contents1[[8]]
-# "<!doctype html><html lang=\"en\"><head><title>HTTP Status 400 – Bad Request</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><body><h1>HTTP Status 400 – Bad Request</h1></body></html>
+# "<!doctype html><html lang=\"en\"><head><title>HTTP Status 400 Â– Bad Request</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><body><h1>HTTP Status 400 Â– Bad Request</h1></body></html>
 
 
 length(contents1[str_detect(contents1, "Status 400")])
