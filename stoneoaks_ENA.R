@@ -444,6 +444,7 @@ length(number.of.results1[number.of.results1==2])
 length(number.of.results1[number.of.results1>2])
 # 3 institution codes had more than 2 results
 
+
 # Pie chart with percentages of institution codes that have Status code 400 response, 0, 1 or more than 2 results in GBIF Registry of Scientific Collections
 
 slices2 <- c(1, 1, 3, 3)
@@ -452,7 +453,7 @@ pct2 <- round(slices2/sum(slices2)*100)
 lbls2 <- paste(lbls2, pct2) # add percents to labels
 lbls2 <- paste(lbls2,"%",sep="") # add % to labels
 pie(slices2,labels = lbls2, col=rainbow(length(lbls2)),
-    main="Pie chart of institution codes queried in GBIF")
+    main="Pie chart of institution codes queried in GRSciColl database")
 
 institution.code.items1 <- sapply(lol1, "[[", "results")
 
