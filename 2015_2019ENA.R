@@ -800,6 +800,12 @@ str_detect(e$specimen_idB, ".*-(.*)\\-.*")
 # format = institution_code:specimen_id and 22 accessions with source identifier formats = institution_code:specimen_id and = specimen_id.
 # Zero accessions from ENA.dfB.codes and ENA.dfC.codes data frames have specimen_ids with the pattern "text-text-text".
 
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+
+library(tidyverse)
+
 ENA.dfA.A.codes <- read.csv(file = "ENA.dfA.A.codes.csv")
 
 df <- ENA.dfA.A.codes %>%
@@ -825,15 +831,31 @@ length(df2$accession)
 
 dash <- str_detect(df2$material_id, ".*-(.*)\\-.*")
 
-length(dash[dash == "TRUE"])
-# 218 accessions have the pattern "text-text-text" with "-" delimiter in "material_id" 
-
-# AND
-
 dash1 <- str_detect(df2$specimen_id, ".*-(.*)\\-.*")
 
-length(dash1[dash1 == "TRUE"])
-# 112 accessions have the pattern "text-text-text" with "-" delimiter in "specimen_id"  
+
+# add "dash" and "dash1" as columns in df2
+df2NEW <- cbind(df2, dash, dash1)
+
+
+nrow(df2NEW %>% 
+    filter(dash==TRUE & dash1==TRUE))
+# 112 accessions
+
+nrow(df2NEW %>% 
+       filter(dash==TRUE & dash1!=TRUE))
+# 106 accessions
+
+nrow(df2NEW %>% 
+       filter(dash!=TRUE & dash1==TRUE))
+# 0 accessions
+
+nrow(df2NEW %>% 
+       filter(dash!=TRUE & dash1!=TRUE))
+# 165 accessions
+
+sum(112,106)
+# 218 accessions have the pattern "text-text-text" with "-" delimiter in material_id and/or specimen_id
 
 
 df3 <- ENA.dfA.A.codes %>%
@@ -877,6 +899,8 @@ rm(list = ls(all=T))
 setwd("D:/Research project_DISSCO/DISSCO R")
 getwd()
 
+library(tidyverse)
+
 ENA.dfA.B.codes <- read.csv(file = "ENA.dfA.B.codes.csv")
 
 df <- ENA.dfA.B.codes %>%
@@ -907,6 +931,8 @@ length(dash[dash == "TRUE"])
 rm(list = ls(all=T))
 setwd("D:/Research project_DISSCO/DISSCO R")
 getwd()
+
+library(tidyverse)
 
 ENA.dfA.C.codes <- read.csv(file = "ENA.dfA.C.codes.csv")
 
