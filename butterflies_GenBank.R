@@ -21,7 +21,7 @@ library(rentrez)
 library(httr)
 library(jsonlite)
 
-butterflies.vouchers <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/zookeys-938-097-s001.csv") 
+butterflies.vouchers <- read.csv(file = "zookeys-938-097-s001.csv") 
 names(butterflies.vouchers)[1] <- "Species.name"
 
 # create voucher vector
@@ -196,7 +196,7 @@ voucher.dataNEW <- filter(voucher.data.df, grepl(paste(dput(as.character(butterf
 length(unique(voucher.dataNEW$voucher))
 # after the query in GenBank, we have 360 unique vouchers from the paper linked to 1464 unique IDs (accessions).
 
-write.csv(voucher.dataNEW, file = "D:/Research project_DISSCO/DISSCO R/butterflies.summariesGenBank.csv", row.names = F)
+write.csv(voucher.dataNEW, file = "butterflies.summariesGenBank.csv", row.names = F)
 
 # One voucher can be linked to many sequences and in some cases to different organisms. 
 
@@ -206,7 +206,7 @@ write.csv(voucher.dataNEW, file = "D:/Research project_DISSCO/DISSCO R/butterfli
 # Modify butterflies.summariesGenBank.csv file, take out sub-species from columns "subname" and "subtype" and keep specimen vouchers
 # and isolates first in these columns.
 
-voucher.dataNEW <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/butterflies.summariesGenBankNEW.csv")
+voucher.dataNEW <- read.csv(file = "butterflies.summariesGenBankNEW.csv")
 
 voucher.dataNEW <- voucher.dataNEW %>% add_column(source_identifier = NA, .after = "subname") # add a new column
 
@@ -283,7 +283,7 @@ voucher.dataNEW$specimen_idB = sub("^[^;]*;", "", as.character(voucher.dataNEW$s
 # specimen_idA and specimen_idB columns ready
 
 
-write.csv(voucher.dataNEW, file = "D:/Research project_DISSCO/DISSCO R/butterflies.dataGenBank.csv", row.names = F)
+write.csv(voucher.dataNEW, file = "butterflies.dataGenBank.csv", row.names = F)
 
 
 DwCD <- voucher.dataNEW %>%
@@ -354,7 +354,7 @@ pie(slices,labels = lbls, col=rainbow(length(lbls)),
 
 #  Import dataset listing vouchers and Tissue IDs from Wiemer's personal collection  ---------------------------------
 
-butterflies.Wiemers <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/butterflies.Wiemers.csv")
+butterflies.Wiemers <- read.csv(file = "butterflies.Wiemers.csv")
 
 names(butterflies.Wiemers)[1] <- "Voucher" 
 names(butterflies.Wiemers)[2] <- "Tissue ID"
@@ -435,7 +435,7 @@ list[[2]]$items$name
 
 # Filter GRID.json data frame. Select rows based on the values in "acronyms" variable matching to ZMFK and MCZ.
 
-GRID.json <- read_json("D:/Research project_DISSCO/grid-2020-03-15/grid.json", simplifyVector = TRUE)
+GRID.json <- read_json("grid-2020-03-15/grid.json", simplifyVector = TRUE)
 
 class(GRID.json)
 # "list"
