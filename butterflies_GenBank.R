@@ -126,7 +126,7 @@ ids <- lapply(results, "[[", "ids") # list of 496
 ids.df <- map(ids, paste0, collapse = " ") %>% bind_rows() %>% gather(Voucher, GenBank.ids)
 
 # The column GenBank.ids can have 0, 1 or multiple IDs. We want to separate it into multiple rows without losing those
-#vouchers with 0 ID.
+# vouchers with 0 ID.
 
 ids.dfA <- subset(ids.df, ids.df$GenBank.ids == "") # vouchers with 0 IDs.
 
