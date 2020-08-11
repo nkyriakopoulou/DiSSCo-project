@@ -180,7 +180,7 @@ search.df
 # 10 AP014562 Japan:Myo~ "32.1 N ~ Bathymodiolus septem~ Bathymodiolus ~ ""           ""               ""               ""               ""             
 # ... with 1,404,507 more rows
 
-write.csv(search.df, file = 'ENA_sequences_2015_2019.csv', row.names = F)
+write.csv(search.df, file = "ENA_sequences_2015_2019.csv", row.names = F)
 
 length(search.df$accession)
 # 1,404,517 accessions
@@ -188,7 +188,7 @@ length(search.df$accession)
 
 #  How many accessions have information in at least one of the source qualifier fields? ---------------------------------
 
-search.df <- read.csv(file = 'ENA_sequences_2015_2019.csv')
+search.df <- read.csv(file = "ENA_sequences_2015_2019.csv")
 
 # Create a new data frame with sequence accessions that have source identifiers.
 search.df.source <- search.df %>% filter(!(bio_material == "" & specimen_voucher == "" & culture_collection == ""))
@@ -199,7 +199,7 @@ length(search.df.source$accession)
 (length(search.df.source$accession)/length(search.df$accession))*100
 # 32.87337% of the 1.4 million sequence accessions have at least 1 source identifier and will be used for further analysis.
 
-write.csv(search.df.source, file = 'ENAsource.analysis.csv', row.names = F)
+write.csv(search.df.source, file = "ENAsource.analysis.csv", row.names = F)
 
 
 #  How many accessions do not have information in one of the source qualifier fields? ---------------------------------
@@ -214,7 +214,7 @@ length(search.df.nosource$accession)
 
 # 2 accessions are missing so they will be excluded from the analysis
 
-write.csv(search.df.nosource, file = 'ENAnosource.analysis.csv', row.names = F)
+write.csv(search.df.nosource, file = "ENAnosource.analysis.csv", row.names = F)
 
 slices <- c(461712, 942803)
 lbls <- c("At least 1 source identifier", "No source identifier")
@@ -235,7 +235,7 @@ length(sample$accession)
 (length(sample$accession)/length(search.df.nosource$accession))*100
 # 6.741281% of the 942,803 accessions have sample accession ID
 
-write.csv(sample, file = 'ENAsample.analysis.csv', row.names = F)
+write.csv(sample, file = "ENAsample.analysis.csv", row.names = F)
 
 
 #  How many accessions from the remaining 67% do not have sample accession ID? ---------------------------------
@@ -259,7 +259,7 @@ pie(slices1,labels = lbls1, col=rainbow(length(lbls1)),
 
 #  Examine the accessions that do not have source identifiers and assess if they are taken from viruses and bacteria ---------------------------------
 
-search.df.nosource <- read.csv(file = 'ENAnosource.analysis.csv')
+search.df.nosource <- read.csv(file = "ENAnosource.analysis.csv")
 
 search.df.nosource[is.na(search.df.nosource)] <- "" 
 
@@ -318,7 +318,7 @@ sum(484027, 74033, 16284, 66, 84325, 549)
 (659284/length(search.df.nosource$accession))*100
 # 69.92808% of the accessions with no source identifiers refer to sequences coming from viruses, bacteria and in general, microorganisms
 
-write.csv(search.df.nosource, file = 'ENAnosource.analysis.csv', row.names = F)
+write.csv(search.df.nosource, file = "ENAnosource.analysis.csv", row.names = F)
 
 
 #  Examine the data frame that contains sequences with source identifiers and split into smaller data frames ---------------------------------
@@ -329,7 +329,7 @@ getwd()
 
 library(tidyverse)
 
-search.df.source <- read.csv(file = 'ENAsource.analysis.csv')
+search.df.source <- read.csv(file = "ENAsource.analysis.csv")
 
 # Some accessions seem to have more than one culture_collection or specimen_voucher identifiers separated by ;.
 # We will create three different data frames and analyse them separately.
@@ -490,7 +490,7 @@ ENA.dfA.A.codes$institution_codeB = sub("\\:[^:]*", "", as.character(ENA.dfA.A.c
 
 ENA.dfA.A.codes <- ENA.dfA.A.codes[, c(1, 2, 3, 4, 5, 6, 10, 11, 7, 8, 9, 12, 13, 14, 15, 16)]
 
-write.csv(ENA.dfA.A.codes, file = 'ENA.dfA.A.codes.csv', row.names = F)
+write.csv(ENA.dfA.A.codes, file = "ENA.dfA.A.codes.csv", row.names = F)
 
 
 #  sourceA.B data frame =================================
@@ -553,7 +553,7 @@ ENA.dfA.B.codes$institution_codeB = sub("\\:[^:]*", "", as.character(ENA.dfA.B.c
 
 ENA.dfA.B.codes <- ENA.dfA.B.codes[, c(1, 2, 3, 4, 5, 6, 7, 10, 8, 9, 11, 12, 13, 14)]
 
-write.csv(ENA.dfA.B.codes, file = 'ENA.dfA.B.codes.csv', row.names = F)
+write.csv(ENA.dfA.B.codes, file = "ENA.dfA.B.codes.csv", row.names = F)
 
 
 #  sourceA.C data frame =================================
@@ -613,7 +613,7 @@ ENA.dfA.C.codes$institution_code = sub("\\:[^:]*$", "", as.character(ENA.dfA.C.c
 
 ENA.dfA.C.codes <- ENA.dfA.C.codes[, c(1, 2, 3, 4, 5, 10, 11, 12, 6, 7, 8, 9, 13, 14)]
 
-write.csv(ENA.dfA.C.codes, file = 'ENA.dfA.C.codes.csv', row.names = F)
+write.csv(ENA.dfA.C.codes, file = "ENA.dfA.C.codes.csv", row.names = F)
 
 
 #  Next we will work on sourceB and sourceC data frames ---------------------------------
@@ -634,7 +634,7 @@ ENA.dfB.codes <- separate(data = ENA.dfB.codes, col = culture_collectionB, into 
 
 ENA.dfB.codes[is.na(ENA.dfB.codes)] <- "" 
 
-write.csv(ENA.dfB.codes, file = 'ENA.dfB.codes.csv', row.names = F)
+write.csv(ENA.dfB.codes, file = "ENA.dfB.codes.csv", row.names = F)
 
 
 #  sourceC data frame =================================
@@ -728,7 +728,7 @@ ENA.dfC.codes$specimen_idC[is.na(ENA.dfC.codes$specimen_idC)] <- as.character(EN
 
 # specimen_idC column ready
 
-write.csv(ENA.dfC.codes, file = 'ENA.dfC.codes.csv', row.names = F)
+write.csv(ENA.dfC.codes, file = "ENA.dfC.codes.csv", row.names = F)
 
 
 #  Calculate percentages of sequence accessions with source identifiers that have one, two or three parts of the Darwin Core Triplet ---------------------------------
@@ -739,11 +739,11 @@ getwd()
 
 library(tidyverse)
 
-ENA.dfB.codes <- read.csv(file = 'ENA.dfB.codes.csv')
-ENA.dfC.codes <- read.csv(file = 'ENA.dfC.codes.csv')
+ENA.dfB.codes <- read.csv(file = "ENA.dfB.codes.csv")
+ENA.dfC.codes <- read.csv(file = "ENA.dfC.codes.csv")
 
-# ENA.dfB.codes: 46 accessions have two culture_collection identifiers each. Both have the format /culture_collection=institution-code:culture_id.
-# ENA.dfC.codes: 123 accessions have two or three specimen_vouchers with formats /specimen_voucher=institution-code:specimen_id and 
+# ENA.dfB.codes: 46 accessions have two culture_collection identifiers each. Both have the format /culture_collection=institution_code:culture_id.
+# ENA.dfC.codes: 123 accessions have two or three specimen_vouchers with formats /specimen_voucher=institution_code:specimen_id and 
 # /specimen_voucher=specimen_id.
 
 a <- ENA.dfC.codes %>%
@@ -795,12 +795,12 @@ str_detect(e$specimen_idB, ".*-(.*)\\-.*")
 
 # 0 accessions have the pattern "text-text-text" with "-" delimiter in "specimen_idA" and "specimen_idB"
 
-# CONCLUSIONS: Data frame ENA.dfB.codes has 46 accessions with source identifier format = institution-code:specimen_id. 
+# CONCLUSIONS: Data frame ENA.dfB.codes has 46 accessions with source identifier format = institution_code:specimen_id. 
 # Data frame ENA.dfC.codes has 82 accessions with source identifier format = specimen_id, 19 accessions with source identifier 
-# format = institution-code:specimen_id and 22 accessions with source identifier formats = institution-code:specimen_id and = specimen_id.
-# Zero accessions have specimen_ids with the pattern "text-text-text".
+# format = institution_code:specimen_id and 22 accessions with source identifier formats = institution_code:specimen_id and = specimen_id.
+# Zero accessions from ENA.dfB.codes and ENA.dfC.codes data frames have specimen_ids with the pattern "text-text-text".
 
-ENA.dfA.A.codes <- read.csv(file = 'ENA.dfA.A.codes.csv')
+ENA.dfA.A.codes <- read.csv(file = "ENA.dfA.A.codes.csv")
 
 df <- ENA.dfA.A.codes %>%
   filter(institution_codeA!="" & collection_codeA!="" & material_id!="" & institution_codeB!="" & collection_codeB!="" & specimen_id!="")
@@ -869,49 +869,58 @@ length(df5$accession)
 # 8 accessions with  = institution_code:material_id/specimen_id, 383 accessions with = material_id/specimen_id, 10 accessions with 
 # = institution_code:collection_code:material_id/specimen_id and = institution_code:material_id/specimen_id and 11 accessions with 
 # = institution_code:material_id/specimen_id and = material_id/specimen_id.
-# In total 218 + 4 = 222 accessions have source identifiers with the format =catalogNumber constructed according to the pattern "text-text-text" 
-# (the "-" delimiter is used). 
+# In total 218 + 4 = 222 accessions from ENA.dfA.A.codes data frame have source identifiers with the format =catalogNumber constructed according to 
+# the pattern "text-text-text".
 
-ENA.dfA.B.codes <- read.csv(file = 'ENA.dfA.B.codes.csv')
+
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+
+ENA.dfA.B.codes <- read.csv(file = "ENA.dfA.B.codes.csv")
 
 df <- ENA.dfA.B.codes %>%
   filter(institution_codeA!="" & culture_id!="" & institution_codeB!="" & specimen_id!="")
 
 length(df$accession)
-# 411 accessions have culture_collection and specimen_voucher qualifiers with the format = institution-code:culture_id/specimen_id
+# 411 accessions have culture_collection and specimen_voucher qualifiers with the format = institution_code:culture_id/specimen_id
 
 df1 <- ENA.dfA.B.codes %>%
   filter(institution_codeA!="" & culture_id!="" & institution_codeB=="" & specimen_id!="")
 
 length(df1$accession)
-# 223 accessions have culture_collection and specimen_voucher qualifiers with the formats = institution-code:culture_id
+# 223 accessions have culture_collection and specimen_voucher qualifiers with the formats = institution_code:culture_id
 # and = specimen_id
 
 # Detect the presence of "-" delimiter in "specimen_id".
 
-dash <- str_detect(df1$specimen_id, "-")
+dash <- str_detect(df1$specimen_id, ".*-(.*)\\-.*")
 
 length(dash[dash == "TRUE"])
-# 58 accessions have "-" delimiter in "specimen_id" 
+# 8 accessions have the pattern "text-text-text" with "-" delimiter in "specimen_id"  
 
+# CONCLUSIONS: Data frame ENA.dfA.B.codes has 411 accessions with source identifier format = institution_code:culture_id/specimen_id  
+# and 223 accessions with source identifier formats = institution_code:culture_id and = specimen_id.
+# In total 8 accessions from ENA.dfA.B.codes data frame have source identifiers with the format =catalogNumber constructed according
+# to the pattern "text-text-text".
 
-# CONCLUSIONS: Data frame ENA.dfA.B.codes has 411 accessions with source identifier format = institution-code:culture_id/specimen_id  
-# and 223 accessions with source identifier formats = institution-code:culture_id and = specimen_id (58 have the dash delimiter). 
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
 
-
-ENA.dfA.C.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.C.codes.csv")
+ENA.dfA.C.codes <- read.csv(file = "ENA.dfA.C.codes.csv")
 
 df <- ENA.dfA.C.codes %>%
   filter(institution_code!="" & collection_code!="" & material_culture_or_specimen_id!="")
 
 length(df$accession)
-# 4476 accessions have source identifiers with the format = institution-code:collection-code:material_culture_or_specimen_id
+# 4476 accessions have source identifiers with the format = institution_code:collection_code:material_culture_or_specimen_id
 
 df1 <- ENA.dfA.C.codes %>%
   filter(institution_code!="" & collection_code=="" & material_culture_or_specimen_id!="")
 
 length(df1$accession)
-# 17953 accessions have source identifiers with the format = institution-code:material_culture_or_specimen_id
+# 17953 accessions have source identifiers with the format = institution_code:material_culture_or_specimen_id
 
 df2 <- ENA.dfA.C.codes %>%
   filter(institution_code=="" & collection_code=="" & material_culture_or_specimen_id!="")
@@ -919,33 +928,31 @@ df2 <- ENA.dfA.C.codes %>%
 length(df2$accession)
 # 438030 accessions have source identifiers with the format = material_culture_or_specimen_id
 
+
 # Detect the presence of "-" delimiter in "material_culture_or_specimen_id".
 
-dash <- str_detect(df2$material_culture_or_specimen_id, "-")
+dash <- str_detect(df2$material_culture_or_specimen_id, ".*-(.*)\\-.*")
 
 length(dash[dash == "TRUE"])
-# 176245 accessions have "-" delimiter in "material_culture_or_specimen_id" 
+# 17876 accessions have the pattern "text-text-text" with "-" delimiter in "material_culture_or_specimen_id" 
 
 
-# CONCLUSIONS: Data frame ENA.dfA.C.codes has 4476 accessions with source identifier format = institution-code:collection-code:material_culture_or_specimen_id, 
-# 17953 accessions with source identifier format = institution-code:material_culture_or_specimen_id and 438030 accessions with source identifier format = material_culture_or_specimen_id
-# (176245 have the dash delimiter). 
-
+# CONCLUSIONS: Data frame ENA.dfA.C.codes has 4476 accessions with source identifier format = institution_code:collection_code:material_culture_or_specimen_id, 
+# 17953 accessions with source identifier format = institution_code:material_culture_or_specimen_id and 438030 accessions with source identifier format = material_culture_or_specimen_id
+# In total 17876 accessions from ENA.dfA.C.codes data frame have source identifiers with the format =catalogNumber constructed according to the pattern "text-text-text".
 
 # How many accessions coming from all data frames have source identifiers that correspond to the Darwin Core Triplet (institution_code, 
 # collection_code and material/culture/specimen_id (=catalogNumber))? How many accessions have two or one part of the triplet?
 
-search.df.source <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENAsource.analysis.csv")
+search.df.source <- read.csv(file = "ENAsource.analysis.csv")
 
 # Number of accessions with source identifier format that corresponds to the Darwin Core Triplet
 sum(38,4476)
 # 4514
 
-
 # Number of accessions with source identifier format =institution_code:catalogNumber
 sum(46,19,8,411,17953)
 # 18437
-
 
 # Number of accessions with source identifier format = catalogNumber
 sum(2,80,383,438030)
@@ -957,11 +964,11 @@ sum(4514,18437,438495)
 461712-461446
 # 266 accessions have more than one source identifier formats
 
-sum(262,58,176245,7)
-# 176572 accessions studied have source identifier format =catalogNumber that contains dash ("-") delimiter 
+sum(222,8,17876)
+# 18106 accessions studied have source identifier format =catalogNumber that contains the pattern "text-text-text" 
 
-(176572/461712)*100
-# 38.24289% of the accessions associated with source identifiers have the format =catalogNumber that contains dash ("-") delimiter  
+(18106/461712)*100
+# 3.921492% of the accessions are associated with source identifiers with the format =catalogNumber and the pattern "text-text-text"  
 
 #  Create tables with percentages and numbers of accessions =================================
 
@@ -973,8 +980,8 @@ df <- data.frame(x,y)
 names(df) <- c(x_name,y_name)
 df$percentage <- (df$accessions.count/461712)*100
 
-print(df) #dataframe that includes the number of accessions that have one, two or three parts of the Darwin Core Triplet
-           #as well as their percentages in the 461,712 sequence accessions studied
+print(df) # dataframe that includes the number of accessions that have one, two or three parts of the Darwin Core Triplet
+          # as well as their percentages in the 461,712 sequence accessions studied
 
 #                      identifier accessions.count    percentage
 #1                  catalogNumber           438495   94.97154070
@@ -991,8 +998,8 @@ df1 <- data.frame(x1,y1)
 names(df1) <- c(x1_name,y1_name)
 df1$percentage <- (df1$accessions.count/1404515)*100
 
-print(df1) #dataframe that includes the number of accessions that have one, two or three parts of the Darwin Core Triplet
-           #as well as their percentages in the 1,404,515 sequence accessions downloaded from the ENA database.
+print(df1) # dataframe that includes the number of accessions that have one, two or three parts of the Darwin Core Triplet
+           # as well as their percentages in the 1,404,515 sequence accessions downloaded from the ENA database.
 
 #                      identifier  accessions.count      percentage
 #1           No source identifier            942803     67.12658818
@@ -1000,7 +1007,6 @@ print(df1) #dataframe that includes the number of accessions that have one, two 
 #3 institution_code:catalogNumber             18437      1.31269513
 #4                    DwC Triplet              4514      0.32139208
 #5    >1 source identifier format               266      0.01893892
-
 
 
 #  Search institution codes against ROR API using /organizations?query= (https://github.com/ror-community/ror-api) ---------------------------------
@@ -1013,11 +1019,11 @@ library(httr)
 library(jsonlite)
 library(tidyverse)
 
-ENA.dfA.A.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.A.codes.csv")
-ENA.dfA.B.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.B.codes.csv")
-ENA.dfA.C.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfA.C.codes.csv")
-ENA.dfB.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfB.codes.csv")
-ENA.dfC.codes <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/ENA.dfC.codes.csv")
+ENA.dfA.A.codes <- read.csv(file = "ENA.dfA.A.codes.csv")
+ENA.dfA.B.codes <- read.csv(file = "ENA.dfA.B.codes.csv")
+ENA.dfA.C.codes <- read.csv(file = "ENA.dfA.C.codes.csv")
+ENA.dfB.codes <- read.csv(file = "ENA.dfB.codes.csv")
+ENA.dfC.codes <- read.csv(file = "ENA.dfC.codes.csv")
 
 
 # Create a character vector of institution codes from all data frames.
@@ -1047,7 +1053,7 @@ institution_codeALL
 
 institution_codeTOT <- as.data.frame(institution_codeALL)
 
-write.csv(institution_codeTOT, file = "D:/Research project_DISSCO/DISSCO R/institution_codeTOT.csv", row.names = F)
+write.csv(institution_codeTOT, file = "institution_codeTOT.csv", row.names = F)
 
 base_ROR = "https://api.ror.org/organizations?query=%s"
 
@@ -1127,7 +1133,7 @@ names(institution_code_nores)[2] <- "number of results"
 
 institution_code_nores$`number of results`[is.na(institution_code_nores$`number of results`)] <- "" 
 
-write.csv(institution_code_nores, file = "D:/Research project_DISSCO/DISSCO R/institution_code_nores.csv", row.names = F)
+write.csv(institution_code_nores, file = "institution_code_nores.csv", row.names = F)
 
 # 5 institution codes had error
 
@@ -1165,7 +1171,7 @@ institution_code_ROR_df <- lapply(institution_code_ROR, as.data.frame)
 # Filter GRID.json data frame. Select rows based on the values in "acronyms" variable matching to the values in
 # the "institution_codeALL" character vector.
 
-GRID.json <- read_json("D:/Research project_DISSCO/grid-2020-03-15/grid.json", simplifyVector = TRUE)
+GRID.json <- read_json("grid-2020-03-15/grid.json", simplifyVector = TRUE)
 
 class(GRID.json)
 # "list"
@@ -1226,7 +1232,7 @@ nores_GRID_json$n[is.na(nores_GRID_json$n)] <- ""
 names(nores_GRID_json)[1] <- "institution codes" 
 names(nores_GRID_json)[2] <- "number of results" 
 
-write.csv(nores_GRID_json, file = "D:/Research project_DISSCO/DISSCO R/nores_GRID_json.csv", row.names = F)
+write.csv(nores_GRID_json, file = "nores_GRID_json.csv", row.names = F)
 
 
 #  Search institution codes against GBIF Registry of Scientific Collections API (https://www.gbif.org/developer/registry) ---------------------------------
@@ -1301,7 +1307,7 @@ institution_code_nores1$number_of_results1[is.na(institution_code_nores1$number_
 names(institution_code_nores1)[1] <- "institution codes"
 names(institution_code_nores1)[2] <- "number of results"
 
-write.csv(institution_code_nores1, file = "D:/Research project_DISSCO/DISSCO R/institution_code_nores1.csv", row.names = F)
+write.csv(institution_code_nores1, file = "institution_code_nores1.csv", row.names = F)
 
 
 # 58 institution codes had error
@@ -1354,7 +1360,7 @@ length(collection_code)
 
 collection_codeTOT <- as.data.frame(collection_code)
 
-write.csv(collection_codeTOT, file = "D:/Research project_DISSCO/DISSCO R/collection_codeTOT.csv", row.names = F)
+write.csv(collection_codeTOT, file = "collection_codeTOT.csv", row.names = F)
 
 base_GBIF1 = "https://api.gbif.org/v1/grscicoll/collection?q=%s"
 
@@ -1407,7 +1413,7 @@ collection_code_nores$number_of_results2[is.na(collection_code_nores$number_of_r
 names(collection_code_nores)[1] <- "collection codes"
 names(collection_code_nores)[2] <- "number of results"
 
-write.csv(collection_code_nores, file = "D:/Research project_DISSCO/DISSCO R/collection_code_nores.csv", row.names = F)
+write.csv(collection_code_nores, file = "collection_code_nores.csv", row.names = F)
 
 
 # 49 collection codes had Error
