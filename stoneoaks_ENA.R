@@ -17,10 +17,6 @@ install.packages(c("httr", "urltools", "jsonlite", "tidyverse"))
 # which is at the moment private and not accessible to the public. On the other hand, data on Quercus is available
 # in ENA. The original dataset is available here: https://doi.org/10.1371/journal.pone.0232936.s001
 
-library(httr)
-library(jsonlite)
-library(tidyverse)
-
 # Accession list of Lithocarpus species
 Lithocarpus.vouchers <- read.csv(file = 'Supplementary Table_Lithocarpus.csv')
 names(Lithocarpus.vouchers)[1] <- "Species"
@@ -69,8 +65,10 @@ accession <- paste(accession, collapse=",")
 
 print(accession, quote = FALSE)
 
-#[1] LC318796,LC318516,MF770291,LC318778,LC318498,MF770277,LC318777,LC318497,MF770276,LC318789,LC318509,MF770284,LC318800,LC318520,MF770294,LC318801,LC318521,MF770295,,LC318774,LC318494,MF770273
+# LC318796,LC318516,MF770291,LC318778,LC318498,MF770277,LC318777,LC318497,MF770276,LC318789,LC318509,MF770284,LC318800,LC318520,MF770294,LC318801,LC318521,MF770295,,LC318774,LC318494,MF770273
 
+library(httr)
+library(jsonlite)
 
 base_portalurl = "https://www.ebi.ac.uk/ena/portal/api/search?"
 
@@ -95,6 +93,8 @@ df <- fromJSON(data_text)
 
 
 #  Split columns with source identifiers into two columns; institution_code and specimen_id  ---------------------------------
+
+library(tidyverse)
 
 df <- df %>% add_column(specimen_id = NA, .after = "specimen_voucher") # add a new column 
 
@@ -155,6 +155,14 @@ write.csv(Quercus.vouchers, file = 'Quercus.vouchers.csv', row.names = F)
 
 #  How many accessions have none, one, two, or three parts of the Darwin Core Triplet?  ---------------------------------
 
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+
+library(tidyverse)
+
+Quercus.vouchersENA <- read.csv(file = "Quercus.vouchersENA.csv")
+
 specimen_ID <- Quercus.vouchersENA %>%
   filter(institution_code=="" & specimen_id!="")
 
@@ -184,10 +192,6 @@ pie(slices,labels = lbls, col=rainbow(length(lbls)),
 rm(list = ls(all=T))
 setwd("D:/Research project_DISSCO/DISSCO R")
 getwd()
-
-library(httr)
-library(jsonlite)
-library(tidyverse)
 
 Quercus.vouchersENA <- read.csv(file = 'Quercus.vouchersENA.csv')
 
@@ -224,6 +228,9 @@ institution.code.urls <- sprintf(base.ROR, institution.codes) # list of URLS
 institution.code.urls[1] 
 
 # "https://api.ror.org/organizations?query=BKF"
+
+library(httr)
+library(jsonlite)
 
 URLS <- lapply(institution.code.urls, GET) # list of responses
 
@@ -291,6 +298,8 @@ institution.code.items.df <- lapply(institution.code.items, as.data.frame)
 
 
 #  Search institution codes against GRID database ---------------------------------
+
+library(tidyverse)
 
 GRID.json <- read_json('grid-2020-03-15/grid.json', simplifyVector = TRUE)
 
