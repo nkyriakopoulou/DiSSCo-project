@@ -17,9 +17,6 @@ install.packages(c("tidyverse", "rentrez",  "urltools", "httr", "jsonlite"))
 # https://zookeys.pensoft.net/article/50878/download/suppl/31/.
 
 library(tidyverse)
-library(rentrez)
-library(httr)
-library(jsonlite)
 
 butterflies.vouchers <- read.csv(file = "zookeys-938-097-s001.csv") 
 names(butterflies.vouchers)[1] <- "Species.name"
@@ -49,6 +46,8 @@ length(presence[presence == "FALSE"])
 
 
 #  Query GenBank for studied vouchers  ---------------------------------
+
+library(rentrez)
 
 # Create a comma separated vector of vouchers ready for input in R.
 dput(as.character(voucher))
@@ -205,6 +204,12 @@ write.csv(voucher.dataNEW, file = "butterflies.summariesGenBank.csv", row.names 
 
 # Modify butterflies.summariesGenBank.csv file, take out sub-species from columns "subname" and "subtype" and keep specimen vouchers
 # and isolates first in these columns.
+                            
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+
+library(tidyverse)
 
 voucher.dataNEW <- read.csv(file = "butterflies.summariesGenBankNEW.csv")
 
@@ -214,7 +219,6 @@ voucher.dataNEW$source_identifier[is.na(voucher.dataNEW$source_identifier)] <- a
 
 voucher.dataNEW$source_identifier = sub("\\|.*$", "", as.character(voucher.dataNEW$source_identifier)) # remove part of string after first "|"
 
-
 # We have a new data frame with the column "voucher" that contains the vouchers obtained from the paper and the column
 # "source_identifier" that includes the vouchers and isolates from the GenBank query.
 
@@ -222,7 +226,7 @@ voucher.dataNEW$source_identifier = sub("\\|.*$", "", as.character(voucher.dataN
 # Some accessions seem to have more than one source identifiers separated by ;.
 
 source_identifiers <- voucher.dataNEW %>% filter(str_detect(voucher.dataNEW$source_identifier, ";"))
-length(source_pointers$accession)
+length(source_identifiers$accession)
 # 15 accessions have more than one source identifier
 
 voucher.dataNEW <- voucher.dataNEW %>% add_column(specimen_id = NA, .after = "source_identifier") # add a new column
@@ -354,6 +358,10 @@ pie(slices,labels = lbls, col=rainbow(length(lbls)),
 
 #  Import dataset listing vouchers and Tissue IDs from Wiemer's personal collection  ---------------------------------
 
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+                            
 butterflies.Wiemers <- read.csv(file = "butterflies.Wiemers.csv")
 
 names(butterflies.Wiemers)[1] <- "Voucher" 
@@ -383,6 +391,8 @@ institution_code
 
 # "ZFMK"
 
+voucher.dataNEW <- read.csv(file = "butterflies.dataGenBank.csv")
+                            
 voucher.dataNEW$institution_code[voucher.dataNEW$institution_code==""] <- NA
 
 code <- unique(voucher.dataNEW$institution_code)
@@ -402,6 +412,8 @@ institution_code_RORurl <- sprintf(base_ROR, institution_codes)
 institution_code_RORurl[1]
 
 # "https://api.ror.org/organizations?query=ZFMK"
+                            
+library(httr)
 
 URL <- lapply(institution_code_RORurl, GET)
 
@@ -415,6 +427,8 @@ URL[1]
 # Size: 672 B
 
 content <- lapply(URL, content, "text")
+
+library(jsonlite)
 
 list <- lapply(content, fromJSON) # list of lists
 
