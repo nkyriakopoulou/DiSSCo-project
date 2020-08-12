@@ -151,14 +151,21 @@ write.csv(accessions.data.df, file = 'bats.summariesGenBank.csv', row.names = F)
 # Each accession has one GenBank ID and all of them are linked to the same organism (bat coronavirus). GenBank IDs (uids) are 
 # not included in the paper but accessions can be easily traced in nuccore so the IDs are not essential in this case.
 
-accessions.data.df <- read.csv(file = 'bats.summariesGenBank.csv')
+                               
+#  Extract and process the isolates and hosts found in the column "subname" ---------------------------------
+
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+
+library(tidyverse)
+
+accessions.data.df <- read.csv(file = "D:/Research project_DISSCO/DISSCO R/bats.summariesGenBank.csv")
 
 # According to the summaries downloaded from GenBank, the field "subname" contains source identifiers "isolate" and "host" 
 # which indicate viral source material and not material that has been stored in a museum or a collection 
 # (https://www.ncbi.nlm.nih.gov/books/NBK53701/#gbankquickstart.what_kind_of_source_info_3). In this paper, some of the virus 
 # material studied was extracted from vouchered specimens, so it is relevant to examine the source identifiers available.
-
-#  Extract and process the isolates and hosts found in the column "subname" ---------------------------------
 
 accessions.data.df <- accessions.data.df %>% add_column(isolate = NA, .after = "subname") # add a new column
 
