@@ -1004,11 +1004,11 @@ df$percentage <- (df$accessions.count/461712)*100
 print(df) # dataframe that includes the number of accessions that have one, two or three parts of the Darwin Core Triplet
           # as well as their percentages in the 461,712 sequence accessions studied
 
-#                      identifier accessions.count    percentage
-#1                  catalogNumber           438495   94.97154070
-#2 institution_code:catalogNumber            18437    3.99318190
-#3                    DwC Triplet             4514    0.97766573
-#4    >1 source identifier format              266    0.05761167
+#                       identifier  accessions.count    percentage
+# 1                  catalogNumber            438495   94.97154070
+# 2 institution_code:catalogNumber             18437    3.99318190
+# 3                    DwC Triplet              4514    0.97766573
+# 4    >1 source identifier format               266    0.05761167
 
 
 x1 <- c("No source identifier", "catalogNumber", "institution_code:catalogNumber", "DwC Triplet", ">1 source identifier format")
@@ -1022,12 +1022,12 @@ df1$percentage <- (df1$accessions.count/1404515)*100
 print(df1) # dataframe that includes the number of accessions that have one, two or three parts of the Darwin Core Triplet
            # as well as their percentages in the 1,404,515 sequence accessions downloaded from the ENA database.
 
-#                      identifier  accessions.count      percentage
-#1           No source identifier            942803     67.12658818
-#2                  catalogNumber            438495     31.22038568
-#3 institution_code:catalogNumber             18437      1.31269513
-#4                    DwC Triplet              4514      0.32139208
-#5    >1 source identifier format               266      0.01893892
+#                       identifier  accessions.count      percentage
+# 1           No source identifier            942803     67.12658818
+# 2                  catalogNumber            438495     31.22038568
+# 3 institution_code:catalogNumber             18437      1.31269513
+# 4                    DwC Triplet              4514      0.32139208
+# 5    >1 source identifier format               266      0.01893892
 
 
 #  Search institution codes against ROR API using /organizations?query= (https://github.com/ror-community/ror-api) ---------------------------------
@@ -1067,8 +1067,8 @@ length(institution_codeALL)
 
 institution_codeALL
 
-# [1] "NRM"           "B"             "ZFMK"          "RMRIMS"        "DB"            "USNM"          "IBIW"          "MFLU"          "RCC"          
-# [10] "MFLUCC"        "CBS"           "ICMP"          "DAOMC"         "NIES"          "CCF"           "KZP"           "NK"            "NFCCI"        
+# "NRM"           "B"             "ZFMK"          "RMRIMS"        "DB"            "USNM"          "IBIW"          "MFLU"          "RCC"          
+# "MFLUCC"        "CBS"           "ICMP"          "DAOMC"         "NIES"          "CCF"           "KZP"           "NK"            "NFCCI"        
 # ...
 
 institution_codeTOT <- as.data.frame(institution_codeALL)
