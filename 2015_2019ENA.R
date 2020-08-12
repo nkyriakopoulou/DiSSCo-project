@@ -125,7 +125,6 @@ citation("tidyverse")
 
 library(httr)
 library(jsonlite)
-library(tidyverse)
 
 base_url = "https://www.ebi.ac.uk/ena/portal/api/search?"
 
@@ -187,6 +186,12 @@ length(search.df$accession)
 
 
 #  How many accessions have information in at least one of the source qualifier fields? ---------------------------------
+
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+
+library(tidyverse)
 
 search.df <- read.csv(file = "ENA_sequences_2015_2019.csv")
 
@@ -259,6 +264,10 @@ pie(slices1,labels = lbls1, col=rainbow(length(lbls1)),
 
 #  Examine the accessions that do not have source identifiers and assess if they are taken from viruses and bacteria ---------------------------------
 
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+
 search.df.nosource <- read.csv(file = "ENAnosource.analysis.csv")
 
 search.df.nosource[is.na(search.df.nosource)] <- "" 
@@ -318,7 +327,7 @@ sum(484027, 74033, 16284, 66, 84325, 549)
 (659284/length(search.df.nosource$accession))*100
 # 69.92808% of the accessions with no source identifiers refer to sequences coming from viruses, bacteria and in general, microorganisms
 
-write.csv(search.df.nosource, file = "ENAnosource.analysis.csv", row.names = F)
+write.csv(search.df.nosource, file = "ENAnosource.analysisNEW.csv", row.names = F)
 
 
 #  Examine the data frame that contains sequences with source identifiers and split into smaller data frames ---------------------------------
