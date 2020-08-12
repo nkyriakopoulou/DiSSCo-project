@@ -268,6 +268,8 @@ rm(list = ls(all=T))
 setwd("D:/Research project_DISSCO/DISSCO R")
 getwd()
 
+library(tidyverse)
+
 search.df.nosource <- read.csv(file = "ENAnosource.analysis.csv")
 
 search.df.nosource[is.na(search.df.nosource)] <- "" 
@@ -809,11 +811,6 @@ str_detect(e$specimen_idB, ".*-(.*)\\-.*")
 # format = institution_code:specimen_id and 22 accessions with source identifier formats = institution_code:specimen_id and = specimen_id.
 # Zero accessions from ENA.dfB.codes and ENA.dfC.codes data frames have specimen_ids with the pattern "text-text-text".
 
-rm(list = ls(all=T))
-setwd("D:/Research project_DISSCO/DISSCO R")
-getwd()
-
-library(tidyverse)
 
 ENA.dfA.A.codes <- read.csv(file = "ENA.dfA.A.codes.csv")
 
@@ -904,12 +901,6 @@ length(df5$accession)
 # the pattern "text-text-text".
 
 
-rm(list = ls(all=T))
-setwd("D:/Research project_DISSCO/DISSCO R")
-getwd()
-
-library(tidyverse)
-
 ENA.dfA.B.codes <- read.csv(file = "ENA.dfA.B.codes.csv")
 
 df <- ENA.dfA.B.codes %>%
@@ -937,11 +928,6 @@ length(dash[dash == "TRUE"])
 # In total 8 accessions from ENA.dfA.B.codes data frame have source identifiers with the format =catalogNumber constructed according
 # to the pattern "text-text-text".
 
-rm(list = ls(all=T))
-setwd("D:/Research project_DISSCO/DISSCO R")
-getwd()
-
-library(tidyverse)
 
 ENA.dfA.C.codes <- read.csv(file = "ENA.dfA.C.codes.csv")
 
@@ -1059,7 +1045,6 @@ ENA.dfA.B.codes <- read.csv(file = "ENA.dfA.B.codes.csv")
 ENA.dfA.C.codes <- read.csv(file = "ENA.dfA.C.codes.csv")
 ENA.dfB.codes <- read.csv(file = "ENA.dfB.codes.csv")
 ENA.dfC.codes <- read.csv(file = "ENA.dfC.codes.csv")
-
 
 # Create a character vector of institution codes from all data frames.
 
