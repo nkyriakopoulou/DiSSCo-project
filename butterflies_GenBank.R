@@ -331,7 +331,7 @@ print(df1) # dataframe that includes the number of accessions that have no ident
            # Darwin Core Triplet as well as their percentages in a total of 1,464 accessions (same number as IDs)
 
 #                       identifier  accessions count  percentage
-# 1           No source identifier                 1  0.06830601
+# 1          No source identifier                  1  0.06830601
 # 2                   specimen_id               1348 92.07650273
 # 3  institution_code:specimen_id                115  7.85519126
 
