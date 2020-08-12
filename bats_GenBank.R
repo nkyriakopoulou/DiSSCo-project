@@ -227,6 +227,16 @@ write.csv(accessions.data.df, file = 'bats.dataGenBank.csv', row.names = F)
 
 #  Examine the format of host identifiers ---------------------------------
 
+rm(list = ls(all=T))
+setwd("D:/Research project_DISSCO/DISSCO R")
+getwd()
+
+bats.accessions <- read.csv(file = "bats.accessions.csv") 
+names(bats.accessions)[1] <- "accessions"
+
+# create accession vector
+accessions <- unique(bats.accessions$accessions)
+
 accessions.data <- read.csv(file = 'bats.dataGenBankNEW.csv')
 
 length(accessions.data$host.identifier[accessions.data$host.identifier==""])
