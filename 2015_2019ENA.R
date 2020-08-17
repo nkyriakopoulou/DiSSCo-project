@@ -1046,8 +1046,6 @@ ENA.dfA.C.codes <- read.csv(file = "ENA.dfA.C.codes.csv")
 ENA.dfB.codes <- read.csv(file = "ENA.dfB.codes.csv")
 ENA.dfC.codes <- read.csv(file = "ENA.dfC.codes.csv")
 
-# Create a character vector of institution codes from all data frames.
-
 ENA.dfA.A.codes$institution_codeA[ENA.dfA.A.codes$institution_codeA==""] <- NA
 ENA.dfA.A.codes$institution_codeB[ENA.dfA.A.codes$institution_codeB==""] <- NA
 ENA.dfA.B.codes$institution_codeA[ENA.dfA.B.codes$institution_codeA==""] <- NA
@@ -1058,9 +1056,24 @@ ENA.dfC.codes$institution_codeB[ENA.dfC.codes$institution_codeB==""] <- NA
 
 institution_codeALL <- c(ENA.dfA.A.codes$institution_codeA, ENA.dfA.A.codes$institution_codeB, ENA.dfA.B.codes$institution_codeA, ENA.dfA.B.codes$institution_codeB, ENA.dfA.C.codes$institution_code, ENA.dfB.codes$institution_codeA, ENA.dfB.codes$institution_codeB, ENA.dfC.codes$institution_codeA, ENA.dfC.codes$institution_codeB)
 
-institution_codeALL <- unique(institution_codeALL)
+institution_codeALL <- na.omit(institution_codeALL) # character vector with institution codes and without NAs
 
-institution_codeALL <- na.omit(institution_codeALL) # character vector with unique institution codes without NAs
+institution_codeALL.df <- as.data.frame(institution_codeALL)
+
+# How often does an institution acronym occur? Frequency table with table() function in R
+
+freq.table <- table(institution_codeALL.df$institution_codeALL)
+
+freq <- as.data.frame(freq.table)
+
+names(freq)[1] <- "Acronyms"
+names(freq)[2] <- "Frequency"
+
+write.csv(freq, file = "freq.table.institutions.csv", row.names = F)
+
+# Create a character vector of institution codes from all data frames.
+
+institution_codeALL <- unique(institution_codeALL)
 
 length(institution_codeALL)
 # 481 unique institution codes
@@ -1070,10 +1083,6 @@ institution_codeALL
 # "NRM"           "B"             "ZFMK"          "RMRIMS"        "DB"            "USNM"          "IBIW"          "MFLU"          "RCC"          
 # "MFLUCC"        "CBS"           "ICMP"          "DAOMC"         "NIES"          "CCF"           "KZP"           "NK"            "NFCCI"        
 # ...
-
-institution_codeTOT <- as.data.frame(institution_codeALL)
-
-write.csv(institution_codeTOT, file = "institution_codeTOT.csv", row.names = F)
 
 base_ROR = "https://api.ror.org/organizations?query=%s"
 
@@ -1363,24 +1372,33 @@ institution_code_GBIF_df <- lapply(institution_code_GBIF, as.data.frame)
 
 #  Search collection codes against GBIF Registry of Scientific Collections API (https://www.gbif.org/developer/registry) ---------------------------------
   
-# Create a character vector of collection codes from all data frames.
-  
 ENA.dfA.A.codes$collection_codeA[ENA.dfA.A.codes$collection_codeA==""] <- NA
 ENA.dfA.A.codes$collection_codeB[ENA.dfA.A.codes$collection_codeB==""] <- NA
 ENA.dfA.C.codes$collection_code[ENA.dfA.C.codes$collection_code==""] <- NA
 
 collection_code <- c(ENA.dfA.A.codes$collection_codeA, ENA.dfA.A.codes$collection_codeB, ENA.dfA.C.codes$collection_code)
 
-collection_code <- unique(collection_code)
+collection_code <- na.omit(collection_code) # character vector with collection codes and without NAs
 
-collection_code <- na.omit(collection_code) # character vector with unique collection codes without NAs
+collection_code.df <- as.data.frame(collection_code)
+
+# How often does a collection acronym occur? Frequency table with table() function in R
+
+freq.table1 <- table(collection_code.df$collection_code)
+
+freq1 <- as.data.frame(freq.table1)
+
+names(freq1)[1] <- "Acronyms"
+names(freq1)[2] <- "Frequency"
+
+write.csv(freq1, file = "freq.table.collections.csv", row.names = F)
+
+# Create a character vector of collection codes from all data frames.
+
+collection_code <- unique(collection_code)
 
 length(collection_code)
 # 104 unique collection codes
-
-collection_codeTOT <- as.data.frame(collection_code)
-
-write.csv(collection_codeTOT, file = "collection_codeTOT.csv", row.names = F)
 
 base_GBIF1 = "https://api.gbif.org/v1/grscicoll/collection?q=%s"
 
